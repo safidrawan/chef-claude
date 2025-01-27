@@ -4,12 +4,9 @@ export default function ChefMain() {
 
   const [ingredients, setIngredients] = React.useState([]);
 
-  function handleSubmit(event) {
-    event.preventDefault();
-   const formData = new FormData(event.currentTarget);
+  function addIngredient(formData) {
    const ingredient = formData.get('ingredient');
    setIngredients((ingre)=>[...ingre,ingredient])
-   document.getElementById('inputItem').value ="";
   }
   const ingredientsItems = ingredients.map((item) => (
     <li key={item}>{item}</li>
@@ -17,7 +14,7 @@ export default function ChefMain() {
 
   return (
     <main>
-      <form className="input" onSubmit={handleSubmit}>
+      <form className="input" action={addIngredient}>
         <input
           type="text"
           name="ingredient"
