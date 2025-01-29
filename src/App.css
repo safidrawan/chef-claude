@@ -40,3 +40,20 @@ main {
 ul {
   padding: 18px;
 } 
+.get-recipe{
+  background-color:#EDECE8;
+  display: flex;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+}
+.get-recipe button{
+  background-color: #CA6D4B;
+  color: #fff;
+  align-self: center;
+  white-space: nowrap ;
+  margin-left: 20px;
+  border-radius: 6px;
+  padding: 10px 20px;
+  border: none;
+}
