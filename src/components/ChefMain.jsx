@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Ingredients from "./Ingredients";
+import IngredientsList from "./IngredientsList";
 import Recipe from "./Recipe";
 export default function ChefMain() {
   const [ingredients, setIngredients] = React.useState([]);
@@ -8,11 +8,11 @@ export default function ChefMain() {
     const ingredient = formData.get("ingredient");
     setIngredients((ingre) => [...ingre, ingredient]);
   }
-  const ingredientsItems = ingredients.map((item) => (
-    <li key={item}>{item}</li>
-  ));
 
   const [showRecipe, setShowRecipe] = useState(false);
+  function toggleShowRecipe() {
+    setShowRecipe(true);
+  }
 
   return (
     <main>
@@ -25,16 +25,10 @@ export default function ChefMain() {
         />
         <button>Add Ingredients</button>
       </form>
-      {ingredients.length >0 && <Ingredients item= {ingredientsItems} />}
-      {ingredients.length > 3 && (
-        <section className="get-recipe">
-          <div className="text">
-            <h2>Ready for a recipe?</h2>
-            <p>Generate a recipe for you list of ingredients.</p>
-          </div>
-          <button onClick={()=>setShowRecipe(true)}>Get Recipe</button>
-        </section>
-      )}
+      <IngredientsList
+        ingredients={ingredients}
+        toggleShowRecipe={toggleShowRecipe}
+      />
 
       {showRecipe && <Recipe />}
     </main>
