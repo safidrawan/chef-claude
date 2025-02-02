@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import IngredientsList from "./IngredientsList";
 import Recipe from "./Recipe";
+import { getRecipeFromMistral } from "../ai";
+
+
 export default function ChefMain() {
   const [ingredients, setIngredients] = React.useState([]);
 
@@ -9,9 +12,15 @@ export default function ChefMain() {
     setIngredients((ingre) => [...ingre, ingredient]);
   }
 
-  const [showRecipe, setShowRecipe] = useState(false);
-  function toggleShowRecipe() {
-    setShowRecipe(true);
+  const [recipe, setRecipe] = useState("");
+
+  // function toggleShowRecipe() {
+  //   setShowRecipe(true);
+  // }
+
+  async function getRecipe() {
+    const recipeMarkdown = await getRecipeFromMistral(ingredients)
+    setRecipe(recipeMarkdown)
   }
 
   return (
@@ -27,10 +36,10 @@ export default function ChefMain() {
       </form>
       <IngredientsList
         ingredients={ingredients}
-        toggleShowRecipe={toggleShowRecipe}
+        toggleShowRecipe={getRecipe}
       />
 
-      {showRecipe && <Recipe />}
+      {recipe && <Recipe recipe={recipe}/>}
     </main>
   );
 }

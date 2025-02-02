@@ -8,10 +8,10 @@ export default function IngredientsList(props) {
         <h1>Ingredients List:</h1>
         <ul>{ingredientsItems}</ul>
       </div>}
-    {ingredientsItems.length>3 &&   <section className="get-recipe">
+    {ingredientsItems.length>2 &&   <section className="get-recipe">
         <div className="text">
           <h2>Ready for a recipe?</h2>
-          <p>Generate a recipe for you list of ingredients.</p>
+          <p>Generate a recipe for your list of ingredients.</p>
         </div>
         <button onClick={props.toggleShowRecipe}>Get Recipe</button>
       </section>}
