@@ -12,14 +12,16 @@ You are a friendly and creative cooking assistant. Your task is to help us disco
   3. **Instructions**: Step-by-step instructions in simple, clear language.
   4. **Serving Suggestion**: A quick tip on how to serve or enjoy the dish.
 - Format your response in markdown for easy rendering on a web page.
-`
+`;
+
+
 const hf = new HfInference(config.API_KEY)
 
 export async function getRecipeFromMistral(ingredientsArr) {
     const ingredientsString = ingredientsArr.join(", ")
     try {
         const response = await hf.chatCompletion({
-            model: "deepseek-ai/DeepSeek-R1",
+            model: "mistralai/Mixtral-8x7B-Instruct-v0.1",
             messages: [
                 { role: "system", content: SYSTEM_PROMPT },
                 { role: "user", content: `I have ${ingredientsString}. What's a tasty recipe I can make with these ingredients? Feel free to suggest something simple and delicious!` },
