@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import IngredientsList from "./IngredientsList";
 import Recipe from "./Recipe";
 import { getRecipeFromMistral } from "../ai";
-
 
 export default function ChefMain() {
   const [ingredients, setIngredients] = React.useState([]);
@@ -13,14 +12,17 @@ export default function ChefMain() {
   }
 
   const [recipe, setRecipe] = useState("");
+  const recipeSection = useRef(null)
 
-  // function toggleShowRecipe() {
-  //   setShowRecipe(true);
-  // }
+  useEffect(()=>{
+    if(recipe !=="" && recipeSection.current !== null){
+      recipeSection.current.scrollIntoView({behavior:"smooth"})
+    }
+  },[recipe])
 
   async function getRecipe() {
-    const recipeMarkdown = await getRecipeFromMistral(ingredients)
-    setRecipe(recipeMarkdown)
+    const recipeMarkdown = await getRecipeFromMistral(ingredients);
+    setRecipe(recipeMarkdown);
   }
 
   return (
@@ -34,12 +36,9 @@ export default function ChefMain() {
         />
         <button>Add Ingredients</button>
       </form>
-      <IngredientsList
-        ingredients={ingredients}
-        toggleShowRecipe={getRecipe}
-      />
+      <IngredientsList ingredients={ingredients} toggleShowRecipe={getRecipe} ref={recipeSection} />
 
-      {recipe && <Recipe recipe={recipe}/>}
+      {recipe && <Recipe recipe={recipe} />}
     </main>
   );
 }

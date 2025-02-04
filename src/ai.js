@@ -26,7 +26,7 @@ export async function getRecipeFromMistral(ingredientsArr) {
                 { role: "system", content: SYSTEM_PROMPT },
                 { role: "user", content: `I have ${ingredientsString}. What's a tasty recipe I can make with these ingredients? Feel free to suggest something simple and delicious!` },
             ],
-            provider: "together",
+            // provider: "together",
             max_tokens: 1024,
         })
         return response.choices[0].message.content
